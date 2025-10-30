@@ -12,19 +12,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body>
-        <header style={{ padding: "20px", background: "#f5f5f5" }}>
+        <header style={{ padding: "20px", background: "#ff3", color:"black" }}>
           <nav style={{ display: "flex", gap: "15px" }}>
             <Link href="/">Home</Link>
-            <Link href="/dashboard">DashBoard</Link>
+            <Link href="/about">DashBoard</Link>
             <Link href="/contact">Contact</Link>
           </nav>
         </header>
 
         <main style={{ padding: "40px" }}>{children}</main>
 
-        <footer style={{ textAlign: "center", padding: "20px", background: "#f5f5f5" }}>
-          <p>© 2025 My Next.js App</p>
-        </footer>
+     
       </body>
     </html>
   );
