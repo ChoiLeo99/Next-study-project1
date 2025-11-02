@@ -1,40 +1,32 @@
-import type { Metadata, ResolvingMetadata } from 'next';
-import React from 'react';
+import { getProduct, getProducts } from '@/service/products';
+import { notFound } from 'next/navigation';
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: {
+    slug: string;
+  };
 };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const { slug } = await params;
+export function generateMetadata({ params }: Props) {
   return {
-    title: `제품의 이름: ${slug}`,
-    description: `${slug} 제품의 상세 설명 페이지입니다.`,
-    icons: {
-      icon: '/favicon.ico'
-    }
+    title: `제품의 이름: ${params.slug}`,
   };
 }
 
-export default async function PantsPage({ params }: Props) {
-  const { slug } = await params;
+export default function PantsPage({ params: { slug } }: Props) {
+  const product = getProduct(slug);
 
-  return (
-    <div>
-      <header>
-        <a href="">남성복</a>
-        <a href="">여성복</a>
-      </header>
-      <h1>{slug} 제품 설명 페이지</h1>
-    </div>
-  );
+  if (!product) {
+    notFound();
+  }
+
+  // 서버 파일에 있는 데이터중 해당 제품의 정보를 찾아서 그걸 보여줌
+  return <h1>{product} 제품 설명 페이지</h1>;
 }
 
 export function generateStaticParams() {
-  const products = ['pants', 'skirt'];
+  // 모든 제품의 페이지들을 미리 만들어 둘 수 있게 해줄거임 (SSG)
+  const products = getProducts();
   return products.map((product) => ({
     slug: product,
   }));
