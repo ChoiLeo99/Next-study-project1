@@ -1,6 +1,8 @@
 import { getProduct, getProducts } from '@/service/products';
 import { notFound } from 'next/navigation';
 
+export const revalidate = 3;
+
 type Props = {
   params: Promise<{ slug: string }>; // ✅ Next.js 16에서는 Promise 형태임
 };
