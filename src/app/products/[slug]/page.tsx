@@ -1,5 +1,6 @@
 import { getProduct, getProducts } from '@/service/products';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 
 export const revalidate = 3;
 
@@ -31,6 +32,12 @@ export default async function ProductPage({ params }: Props) {
   return (
     <h1>
       {product.name} 제품 설명 페이지
+      <Image
+        src={`/images/${product.image}`}
+        alt={product.image}
+        width='300'
+        height="300"
+      />
       {product.price} 제품 가격
     </h1>
   );
