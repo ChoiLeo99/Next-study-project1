@@ -1,7 +1,6 @@
 import { getProducts } from '@/service/products';
 import Link from 'next/link';
 import Image from 'next/image';
-import styles from './page.module.css'
 import MeowArticle from '@/components/MeowArticle';
 import clothesImage from '../../../public/images/clothes.jpg'
 
