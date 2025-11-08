@@ -25,6 +25,18 @@ const nextConfig: NextConfig = {
       },
      ]
   },
+  async rewrites() {
+     return [
+      {
+        source: '/sejun',
+        destination: '/about/me/sejun',
+      },
+      {
+        source: '/items/:slug',
+        destination: '/products/:slug',
+      },
+     ]
+  },
 };
 
 export default nextConfig;
