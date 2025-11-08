@@ -1,6 +1,7 @@
 import { getProduct, getProducts } from '@/service/products';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Image from 'next/image';
+import GoProductsButton from '@/components/GoProductsButton';
 
 export const revalidate = 3;
 
@@ -26,7 +27,8 @@ export default async function ProductPage({ params }: Props) {
   const product = await getProduct(slug); // ✅ 실제 product.json에서 해당 id 찾기
 
   if (!product) {
-    notFound(); // 제품 없을 시 404 페이지로 이동
+    redirect('/products')
+    // notFound(); // 제품 없을 시 404 페이지로 이동
   }
 
   return (
@@ -38,6 +40,7 @@ export default async function ProductPage({ params }: Props) {
         width='300'
         height="300"
       />
+      <GoProductsButton/>
       {product.price} 제품 가격
     </h1>
   );
